@@ -1,2 +1,2 @@
 # ITMO
-ALL FROM ITMO
+Something From ITMO
