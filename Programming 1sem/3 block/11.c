@@ -1,5 +1,5 @@
 Main.c
-#include "filewithstucture1.h"
+#include "filewithstructure.h"
 #include <stdio.h>
 main(){
  float s,p;
