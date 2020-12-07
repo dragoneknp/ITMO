@@ -1,5 +1,4 @@
-# Programming
-Programming of 1 sem ITMO 16 variant<br/>
+# Programming (16 Variant)
 <a href="https://github.com/dragoneknp/ITMO/blob/main/Programming%201sem/1%20block/1.c"> 1.Разработка консольного приложения</a><br/>
 <a href="https://github.com/dragoneknp/ITMO/blob/main/Programming%201sem/1%20block/2.c"> 2.Расчёт значения функции в заданной точке</a><br/>
 <a href="https://github.com/dragoneknp/ITMO/blob/main/Programming%201sem/1%20block/3.c"> 3.Представление чисел в различных системах счисления и битовые
