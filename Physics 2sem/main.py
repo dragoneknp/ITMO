@@ -1,67 +1,77 @@
-from math import log, cos, sin
+import math
 import matplotlib.pyplot as plt
 
-alpha, M, m, u, teta = map(int, input().split()) # Скорость сгорания топлива,масса ракеты,масса топлива,скорость истечения газов,угол взлета
-m_earth = 6 * 10 ** 24
-m0 = M + m
-G = 6.7 * 10 ** (-11)
-R = 6371000
-g = G * m_earth / R ** 2
-C1 = log(m0)
-t = 0
-while t < m / alpha:
-    t += 1
-    mt = m0 - alpha * t
-    V = -u * log(m0 - alpha * t) + g * t + u * log(m0)
-    Vx = V * cos(teta)
-    Vy = V * sin(teta)
-    C2 = -m0 * u * log(m0) / alpha
-    y = u * (m0 / alpha - t) * log(m0 - alpha * t) + g * t ** 2 / 2 + u * t * (log(m0) + 1) + C2
-    x = u * (m0 / alpha - t) * log(m0 - alpha * t) + u * t * (log(m0) + 1) + C2
-    print(Vx, Vy)
-    print(V)
-    print(x, y)
-    print(mt)
-tg = range(0, t)
+teta, Mr, Mt, u, alpha = map(int, input().split())
+Mearth = 5.972e+24
+teta = 90 - teta
+# 80 30 40 250 20
+R = 6371 * 10  3
+g0 = 6.67e-11 * Mearth / R / R
 
+x, y = 0, 1
+v = 0
+i = 0
+h = 0.1
+m = Mt + Mr
+Vx = 0
+Vy = 0
+plot_m, plot_v, plot_x, plot_y = [], [], [], []
+plot_Vx, plot_Vy = [], []
+i = 0
 
-def m(t):
-    return [(m0 - alpha * i) for i in t]
+while y >= 0:
+    g = g0 * R * R / ((R + y) * (R + y))
 
+    if m - Mr > 0:
+        Vx += math.sin(teta * math.pi / 180) * u * alpha * h / (m - alpha * h)
+        Vy += math.cos(teta * math.pi / 180) * u * alpha * h / (m - alpha * h)
+        m -= alpha * h
+    Vy -= g * h
+    y -= g * h
 
-def v(t):
-    return [(-u * log(m0 - alpha * i) + g * i + u * log(m0)) for i in t]
+    if Vx != 0:
+        teta = math.atan2(Vy, -Vx) * 180 / math.pi - 90
+        print(teta)
+    else:
+        if Vy >= 0:
+            teta = 0
+        else:
+            teta = 180
 
+    x += Vx * h
+    y += Vy * h
 
-def x(t):
-    return ([u * (m0 / alpha - i) * log(m0 - alpha * i) + u * i * (log(m0) + 1) + -m0 * u * log(m0) / alpha for i in t])
+    plot_m.append(m - Mr)
+    plot_v.append(math.sqrt(Vx  2 + Vy ** 2))
+    plot_x.append(x)
+    plot_y.append(y)
+    plot_Vx.append(Vx)
+    plotVy.append(Vy)
+    i += 1
 
+tg = [ for _ in range(i)]
 
-def y(t):
-    return (
-    [u * (m0 / alpha - i) * log(m0 - alpha * i) + g * i ** 2 / 2 + u * i * (log(m0) + 1) + -m0 * u * log(m0) / alpha for
-     i in t])
-
-# Строим график m(t)
-plt.plot(tg, m(tg))
+plt.plot(tg, plot_m)
 plt.xlabel("t")
 plt.ylabel("m(t)")
 plt.show()
 
-# Строим график v(t)
-plt.plot(tg, v(tg))
+plt.plot(plot_x, plot_y)
+plt.xlabel("x")
+plt.ylabel("y")
+plt.show()
+
+plt.plot(tg, plot_v)
 plt.xlabel("t")
 plt.ylabel("V(t)")
 plt.show()
 
-# Строим график x(t)
-plt.plot(tg, x(tg))
+plt.plot(tg, plot_Vy)
 plt.xlabel("t")
-plt.ylabel("x(t)")
+plt.ylabel("Vy")
 plt.show()
 
-# Строим график y(t)
-plt.plot(tg, y(tg))
+plt.plot(tg, plot_Vx)
 plt.xlabel("t")
-plt.ylabel("y(t)")
+plt.ylabel("Vx")
 plt.show()
