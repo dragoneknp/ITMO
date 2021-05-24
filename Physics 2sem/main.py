@@ -31,7 +31,7 @@ while y >= 0:
  
     if Vx != 0:
         teta = math.atan2(Vy, -Vx) * 180 / math.pi - 90
-        print(teta)
+
     else:
         if Vy >= 0:
             teta = 0
