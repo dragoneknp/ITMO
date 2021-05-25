@@ -27,7 +27,7 @@ while y >= 0:
         Vy += math.cos(teta * math.pi / 180) * u * alpha * h / (m - alpha * h)
         m -= alpha * h
     Vy -= g * h
-    y -= g * h
+ 
  
     if Vx != 0:
         teta = math.atan2(Vy, -Vx) * 180 / math.pi - 90
