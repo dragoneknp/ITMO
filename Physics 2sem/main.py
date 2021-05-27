@@ -1,16 +1,10 @@
 import math
 import matplotlib.pyplot as plt
 
-
 # teta, Mr, Mt, u, alpha = 80, 30, 40, 500, 20 # rocket not fall
-teta, Mr, Mt, u, alpha = 88, 30, 40, 250, 80 # rocket fall
+teta, Mr, Mt, u, alpha = 88, 30, 40, 250, 80  # rocket fall
 Mearth = 5.972e+21
 teta = 90 - teta
-
-
-
-
-
 
 R = 6371
 g0 = 6.67e-14 * Mearth / R / R
@@ -33,7 +27,6 @@ while y >= 0:
         Vx += math.sin(teta * math.pi / 180) * u * alpha * h / (m - alpha * h)
         Vy += math.cos(teta * math.pi / 180) * u * alpha * h / (m - alpha * h)
         m -= alpha * h
-
 
     Vy -= g * h
 
